@@ -9,7 +9,7 @@ import com.rabbitmq.client.ConnectionFactory;
 /**
  * To run this program:
  * <p>
- * mvn exec:java -Dexec.mainClass="com.curtisnewbie.EmitLog"
+ * mvn exec:java -Dexec.mainClass="com.curtisnewbie.EmitLogDirect"
  */
 public class EmitLogDirect {
     private final static String HOST = "localhost";

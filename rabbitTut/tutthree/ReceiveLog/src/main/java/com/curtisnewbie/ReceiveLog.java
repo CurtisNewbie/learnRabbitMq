@@ -10,7 +10,7 @@ import com.rabbitmq.client.DeliverCallback;
 /**
  * To run this program:
  * <p>
- * mvn exec:java -Dexec.mainClass="com.curtisnewbie.Worker"
+ * mvn exec:java -Dexec.mainClass="com.curtisnewbie.ReceiveLog"
  */
 public class ReceiveLog {
     private final static String EXCHANGE_NAME = "logs";

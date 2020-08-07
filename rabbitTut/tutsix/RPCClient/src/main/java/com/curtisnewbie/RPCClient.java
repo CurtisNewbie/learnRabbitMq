@@ -12,7 +12,7 @@ import com.rabbitmq.client.ConnectionFactory;
 /**
  * To run this program:
  * <p>
- * mvn exec:java -Dexec.mainClass="com.curtisnewbie.RPCClient" -Dexec.args="#.sys.mem.#"
+ * mvn exec:java -Dexec.mainClass="com.curtisnewbie.RPCClient"
  */
 public class RPCClient {
 
