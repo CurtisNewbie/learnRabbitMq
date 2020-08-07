@@ -13,7 +13,6 @@ import com.rabbitmq.client.DeliverCallback;
  * mvn exec:java -Dexec.mainClass="com.curtisnewbie.Worker"
  */
 public class ReceiveLog {
-    private static String tempQueueName; // queue name isn't important with fanout
     private final static String EXCHANGE_NAME = "logs";
     private final static String EXCHANGE_TYPE = "fanout";
     private final static String ROUTING_KEY = ""; // routing key is ignored in fanout
@@ -29,10 +28,12 @@ public class ReceiveLog {
         Connection conn = factory.newConnection();
         Channel channel = conn.createChannel();
 
+        // queue name isn't important with fanout
         // get name of a generated queue, since we are using fanout, it doesn't matter
-        tempQueueName = channel.queueDeclare().getQueue();
+        String tempQueueName = channel.queueDeclare().getQueue();
 
         // bind exchange to the queue we are using, as if we are subscribing
+        // routing key is ignored since we are using fanout
         channel.exchangeDeclare(EXCHANGE_NAME, EXCHANGE_TYPE);
         channel.queueBind(tempQueueName, EXCHANGE_NAME, ROUTING_KEY);
 

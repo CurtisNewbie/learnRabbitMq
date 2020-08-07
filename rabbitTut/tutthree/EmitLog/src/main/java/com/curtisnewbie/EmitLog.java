@@ -18,7 +18,6 @@ public class EmitLog {
     private final static String EXCHANGE_NAME = "logs";
     private final static String EXCHANGE_TYPE = "fanout";
     private final static String ROUTING_KEY = ""; // routing key is ignored in fanout
-    private final static String RANDOM_QUEUE_NAME = "";
 
     /**
      * With fanout, we are sending messages to exchange, and any queues that are bound to the
@@ -51,8 +50,7 @@ public class EmitLog {
             for (int i = 0; i < 5; i++) {
                 BasicProperties properties = null; // no need for msg persistence
                 String randomMsg = randomLog();
-                channel.basicPublish(EXCHANGE_NAME, RANDOM_QUEUE_NAME, properties,
-                        randomMsg.getBytes());
+                channel.basicPublish(EXCHANGE_NAME, ROUTING_KEY, properties, randomMsg.getBytes());
                 System.out.printf("[x] Sent: '%s'\n", randomMsg);
             }
         }
