@@ -36,16 +36,16 @@ public class NewTask {
                     extraArg);
 
             String task = genRandomTask();
-            String exchange = "";
+            String exchangeName = ""; // name of direct exchange
 
             // persistent messages
             BasicProperties properties = MessageProperties.PERSISTENT_TEXT_PLAIN;
 
-            // with basic publish, when a msg being published and there are more then one consumer,
-            // the msgs are evenly dispatched, i.e., it's not pub-sub
+            // with default exhcange (direct), when a msg being published and there are more then
+            // one consumer, the msgs are evenly dispatched, i.e., it's not pub-sub
             // consumers won't receive all messages published
             // it's called fair dispatch using round-robin
-            channel.basicPublish(exchange, QUEUE_NAME, properties, task.getBytes());
+            channel.basicPublish(exchangeName, QUEUE_NAME, properties, task.getBytes());
             System.out.printf("[x] Dispatched Task: '%s'\n", task);
         }
     }
