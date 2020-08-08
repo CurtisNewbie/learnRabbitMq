@@ -49,13 +49,14 @@ public class RPCClient {
                 .replyTo(replyQueue).build();
 
         String task = "Push-Up";
-        // publish to the same queue name 'QUEUEblock_NAME' used by the RPCServer
+        // publish to the same queue name 'QUEUE_NAME' used by the RPCServer
         channel.basicPublish(EXCHANGE, QUEUE_NAME, props, task.getBytes(DEF_ENCODING));
 
         // block to wait for response
         final BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(1);
 
         // read response from reply queue, a worker thread is created for 'consume' operation
+        // responses are routed by exchange using the routing key (which is the queue name)
         boolean autoAck = true;
         channel.basicConsume(replyQueue, autoAck, (consumerTag, delivery) -> {
             System.out.println("Worker Thread ID: " + Thread.currentThread().getId());

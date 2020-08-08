@@ -52,9 +52,10 @@ public class RPCServer {
                     String task = new String(delivery.getBody(), DEF_ENCODING);
                     String response = complete(task);
 
-                    // reply response
-                    String routingKey = delivery.getProperties().getReplyTo();
-                    channel.basicPublish(EXCHANGE, routingKey, replyProps,
+                    // reply response, replyTo is a name of a queue provided by RPCClient
+                    // and this replyTo queue name is used as routing key for routing
+                    String replyTo = delivery.getProperties().getReplyTo();
+                    channel.basicPublish(EXCHANGE, replyTo, replyProps,
                             response.getBytes(DEF_ENCODING));
                     // message acknowledgement
                     channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
